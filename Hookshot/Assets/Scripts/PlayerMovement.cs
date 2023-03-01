@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
         {
             PlayerRB.velocity = new Vector2(0f, JumpHeight);
         }
-
     }
 
     private void FixedUpdate()
@@ -67,9 +66,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 Scale = transform.localScale;
             Scale.x *= -1;
             transform.localScale = Scale;
-        }
-            
+        }            
     }
-
-
 }
