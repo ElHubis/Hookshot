@@ -9,9 +9,12 @@ public class PlayerDeath : MonoBehaviour
     private Rigidbody2D PlayerRB;
     // Start is called before the first frame update
 
+    HookshotController HookshotController;
+    [SerializeField] GameObject HookShot;
     void Start()
     {
         PlayerRB = GetComponent<Rigidbody2D>();
+        HookshotController = HookShot.GetComponent<HookshotController>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,6 +22,7 @@ public class PlayerDeath : MonoBehaviour
         if (collision.gameObject.CompareTag("Death"))
         {
             Death();
+            HookshotController.StopGrapple();
         }
     }
 

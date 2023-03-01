@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class HookshotController : MonoBehaviour
 {
-    public static Vector2 Direction;
+    public Vector2 Direction;
     private Vector2 ConnectedPoint;
     public DistanceJoint2D HookJoint;
     private LineRenderer RopeRender;
     public Transform FirePoint;
 
-    public static bool IsConnected;
-    [SerializeField] private float DistanceMax = 20f;
+    public bool IsConnected;
+    [HideInInspector]public float DistanceMax = 12f;
+    [SerializeField] private LayerMask GroundLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class HookshotController : MonoBehaviour
         {
             StopGrapple();
         }
+
     }
 
     private void LateUpdate()
@@ -65,7 +67,7 @@ public class HookshotController : MonoBehaviour
     private void StartGrapple()
     {
         Vector2 GrappleDistance = Camera.main.ScreenToWorldPoint(Input.mousePosition) - FirePoint.position;
-        RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, GrappleDistance, DistanceMax);
+        RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, GrappleDistance, DistanceMax, GroundLayer);
 
         ConnectedPoint = hit.point;
 
@@ -77,7 +79,7 @@ public class HookshotController : MonoBehaviour
         }
     }
 
-    private void StopGrapple()
+    public void StopGrapple()
     {
         HookJoint.enabled = false;
         IsConnected = false;

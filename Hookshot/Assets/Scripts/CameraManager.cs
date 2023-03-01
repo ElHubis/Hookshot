@@ -7,11 +7,6 @@ public class CameraManager : MonoBehaviour
 {
     public GameObject VirtualCamera;
 
-    void Start()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player") && !collision.isTrigger)
